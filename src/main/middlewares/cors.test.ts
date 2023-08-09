@@ -7,6 +7,14 @@ describe('Cors Middleware', () => {
       res.send(req.body)
     })
 
-    await request(app).get('/test_cors').expect('access-control-allow-origin', '*')
+    await request(app)
+      .get('/test_cors')
+      .expect('access-control-allow-origin', '*')
+      .expect(
+        'access-control-allow-methods',
+        'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+      )
+      .expect('access-control-allow-headers', 'X-Requested-With,content-type')
+      .expect('access-control-allow-credentials', 'true')
   })
 })
