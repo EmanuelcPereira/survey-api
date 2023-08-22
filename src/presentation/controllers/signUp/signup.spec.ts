@@ -18,7 +18,7 @@ const makeFakeRequest = (): HttpRequest => ({
   }
 })
 
-const makefakeAccount = (): AccountModel => ({
+const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
   name: 'valid_name',
   email: 'valid_email@mail.com',
@@ -37,7 +37,7 @@ const makeEmailValidatorStub = (): EmailValidator => {
 const makeAddAccountStub = (): AddAccount => {
   class AddAccountStub implements AddAccount {
     async add (account: AddAccountModel): Promise<AccountModel> {
-      const fakeAccount = makefakeAccount()
+      const fakeAccount = makeFakeAccount()
 
       return await Promise.resolve(fakeAccount)
     }
@@ -165,6 +165,6 @@ describe('SignUp Controller', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
 
-    expect(httpResponse).toEqual(ok(makefakeAccount()))
+    expect(httpResponse).toEqual(ok(makeFakeAccount()))
   })
 })
