@@ -3,6 +3,7 @@ import { badRequest, ok, serverError, unauthorized } from '../../helper/http/htt
 import { LoginController } from './login'
 import {
   type Authentication,
+  type AuthenticationModel,
   type HttpRequest,
   type Validation
 } from './login-protocols'
@@ -16,7 +17,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth (email: string, password: string): Promise<string> {
+    async auth (authentication: AuthenticationModel): Promise<string> {
       return await Promise.resolve('any_token')
     }
   }
@@ -56,7 +57,7 @@ describe('', () => {
     const authSpy = jest.spyOn(authenticationStub, 'auth')
     await sut.handle(makeFakeRequest())
 
-    expect(authSpy).toHaveBeenCalledWith('any_mail@mail.com', 'any_password')
+    expect(authSpy).toHaveBeenCalledWith({ email: 'any_mail@mail.com', password: 'any_password' })
   })
 
   test('should return 500 if Authentication throws', async () => {
