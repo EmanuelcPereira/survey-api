@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { type Request, type RequestHandler, type Response } from 'express'
-import { type Controller, type HttpRequest } from '../../presentation/protocols'
+import { type Controller, type HttpRequest } from '../../../presentation/protocols'
 
 export const adaptRoute = (
   controller: Controller
